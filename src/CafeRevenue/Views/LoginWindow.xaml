@@ -1,0 +1,13 @@
+<Window x:Class="CafeRevenue.Views.LoginWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="CafeRevenue — Вход" Width="670" Height="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#F3F6F7" Foreground="#293D49" FontSize="16">
+ <Border Background="White" BorderBrush="#CCD8DF" BorderThickness="1" CornerRadius="12" Margin="58,38" Padding="32">
+  <StackPanel>
+   <TextBlock Text="Вход в CafeRevenue" FontSize="26" FontWeight="SemiBold" Margin="0,0,0,20"/>
+   <TextBlock Text="Учёт доходов кафе" FontSize="19" Foreground="#6B7F8C" Margin="0,0,0,34" HorizontalAlignment="Center"/>
+   <TextBlock Text="Логин"/><TextBox x:Name="LoginBox" MaxLength="50" Margin="0,8,0,22"/>
+   <TextBlock Text="Пароль"/><PasswordBox x:Name="PasswordBox" Padding="10" FontSize="17" Margin="0,8,0,24"/>
+   <Button x:Name="LoginButton" Content="Войти" IsDefault="True" Click="Login_Click"/>
+   <TextBlock x:Name="ErrorText" TextWrapping="Wrap" Foreground="#B33636" MinHeight="65" Margin="0,18,0,0"/>
+   <TextBlock Text="Enter — войти. Обратитесь к администратору, если забыли пароль." TextWrapping="Wrap" Foreground="#6B7F8C" FontSize="14"/>
+  </StackPanel>
+ </Border>
+</Window>
