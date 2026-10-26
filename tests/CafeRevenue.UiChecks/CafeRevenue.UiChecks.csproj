@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net9.0-windows</TargetFramework><UseWPF>true</UseWPF><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
+ <ItemGroup><ProjectReference Include="../../src/CafeRevenue/CafeRevenue.csproj"/></ItemGroup>
+ <ItemGroup><None Include="../../src/CafeRevenue/appsettings.json" Link="appsettings.json" CopyToOutputDirectory="PreserveNewest"/></ItemGroup>
+</Project>
