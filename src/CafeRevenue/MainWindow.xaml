@@ -1,8 +1,8 @@
 <Window x:Class="CafeRevenue.MainWindow"
  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- Title="CafeRevenue — Заказы" Width="1180" Height="820" MinWidth="1000" MinHeight="700"
- WindowStartupLocation="CenterScreen" Background="#F3F6F7" Foreground="#293D49" FontSize="15"
+ Title="CafeRevenue — Заказы" Width="1180" Height="820" MinWidth="1000" MinHeight="600"
+ WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#F3F6F7" Foreground="#293D49" FontSize="15"
  Closing="Window_Closing">
  <DockPanel Background="#F3F6F7">
   <Border DockPanel.Dock="Top" Background="White" Padding="22,12">
