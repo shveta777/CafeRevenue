@@ -1,0 +1,11 @@
+.vs/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.mdf
+*.ldf
+*.bak
+**/appsettings.Local.json
+doc/*
+!doc/README.md
