@@ -1,3 +1,4 @@
+using CafeRevenue.Services;
 using System.Data;
 using System.Security.Cryptography;
 using CafeRevenue.Data;
@@ -17,6 +18,27 @@ async Task Reject(Func<Task> action,Type type,string name)
     catch(Exception ex)when(type.IsInstanceOfType(ex)){Check(true,name);return;}
     throw new Exception("FAIL: "+name);
 }
+var modelLine = new OrderLine(1, "Проверка", 2, 100.25m);
+var changedLine = modelLine.WithQuantity(3);
+Check(modelLine.Quantity == 2 && changedLine.Quantity == 3 && changedLine.Total == 300.75m,
+    "Quantity change preserves the original position and recalculates total");
+await Reject(() => { modelLine.WithQuantity(0); return Task.CompletedTask; },
+    typeof(ArgumentException), "Model rejects invalid quantity");
+await Reject(() => { new OrderLine(1, "Проверка", 1, -1); return Task.CompletedTask; },
+    typeof(ArgumentException), "Model rejects negative price");
+var modelVersion = new byte[] { 1, 2, 3 };
+var modelLines = new List<OrderLine> { modelLine };
+var modelOrder = new OrderDetails(1, null, "открыт", modelVersion, 0.50m, modelLines);
+modelLines.Clear();
+modelVersion[0] = 9;
+var exposedVersion = modelOrder.Version;
+exposedVersion[0] = 8;
+Check(modelOrder.Lines.Count == 1 && modelOrder.Total == 200m,
+    "Order protects its positions from changes to the source collection");
+Check(modelOrder.Version[0] == 1,
+    "Order protects its concurrency version from external changes");
+await Reject(() => { ((IList<OrderLine>)modelOrder.Lines).Clear(); return Task.CompletedTask; },
+    typeof(NotSupportedException), "Order positions cannot be changed through the exposed collection");
 string cs=DatabaseConnection.LoadConfiguration().GetConnectionString("CafeRevenueDb")!;
 var repository=new CafeRepository();
 string marker="check_"+Guid.NewGuid().ToString("N");

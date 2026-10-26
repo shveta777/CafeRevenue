@@ -228,8 +228,7 @@ public partial class MainWindow : Window
         if (existing is null)
             cart.Add(new(dish.Id, dish.Name, quantity, dish.Price));
         else
-            cart[cart.IndexOf(existing)] = new OrderLine(existing.MenuItemId,
-                existing.Name, existing.Quantity + quantity, existing.Price);
+            cart[cart.IndexOf(existing)] = existing.WithQuantity(existing.Quantity + quantity);
         MarkChanged();
         StatusText.Text = "Изменения не сохранены. Нажмите «Сохранить заказ».";
     }
@@ -253,7 +252,7 @@ public partial class MainWindow : Window
         }
 
         int index = cart.IndexOf(line);
-        cart[index] = new OrderLine(line.MenuItemId, line.Name, line.Quantity + delta, line.Price);
+        cart[index] = line.WithQuantity(line.Quantity + delta);
         CartGrid.SelectedIndex = index;
         MarkChanged();
     }
